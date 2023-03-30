@@ -1,0 +1,8 @@
+django-cors-headers
+Django
+django-allauth
+djangorestframework
+geopy
+psycopg2
+
+
