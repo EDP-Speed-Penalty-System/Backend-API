@@ -21,3 +21,5 @@ RUN pip install pip setuptools wheel --upgrade
 RUN pip install -r requirements.txt
 
 EXPOSE 8000
+
+CMD [ "python", "manage.py", "runserver" ]

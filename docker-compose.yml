@@ -1,4 +1,4 @@
-version: '1'
+version: '3.3'
 
 services:
   db:
@@ -9,12 +9,13 @@ services:
       - POSTGRES_PASSWORD=pwd
     volumes:
       - pgdata:/var/lib/postgresql/data
-    # command: bash -c "psql -U postgres && CREATE USER edp WITH PASSWORD edp && ALTER USER edp WITH SUPERUSER && CREATE DATABASE edp && \q && psql -U edp -d edp -f 'db_edp.sql'"
     ports:
       - "5432:5432"
+    # command: bash -c "psql -U edp -d edp -f 'db_edp.sql'"
+    
   web:
     build: .
-    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 127.0.0.1:8000"
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/Backend_API
     ports:
@@ -23,5 +24,6 @@ services:
       - db
     environment:
       - DB_HOST=db
+      - DJANGO_SETTINGS_MODULE=EDP.settings
 volumes:
-  pgdata: 
+  pgdata:
