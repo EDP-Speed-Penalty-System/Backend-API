@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_USER=edp
+      - POSTGRES_DB=edp
+      - POSTGRES_PASSWORD=pwd
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    # command: bash -c "psql -U edp -d edp -f 'db_edp.sql'"
+    
+  web:
+    build: .
+    command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/Backend_API
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DJANGO_SETTINGS_MODULE=EDP.settings
+volumes:
+  pgdata:
