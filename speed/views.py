@@ -111,11 +111,16 @@ def penalty(request, username=None):
     
     elif request.method == 'POST':
         user = get_object_or_404(User ,username=request.user.username)
-        serializer = serializers.PenaltySerializer(data=request.data)
+        print(request.data)
+        data = request.data.copy()  # create a copy of the data dictionary
+        data['user'] = user.id
+        serializer = serializers.PostPenaltySerializer(data=data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST) 
+    
+
 
 # @api_view(['GET','POST'])
 # @permission_classes([IsAuthenticated])
