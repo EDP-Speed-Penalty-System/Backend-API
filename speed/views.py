@@ -101,7 +101,10 @@ def get_speed_limit(request):
 def penalty(request, username=None):
     if request.method == 'GET':
         user = get_object_or_404(User, username=username) if username else request.user
-        penalty = Penalty.objects.filter(user=user)
+        register_no = request.headers.get('register-no')
+        print(register_no)
+        vehicle = get_object_or_404(Vehicle, register_no=register_no)
+        penalty = Penalty.objects.filter(user=user, vehicle=vehicle)
         penalties = serializers.PenaltySerializer(penalty,many=True).data
         resp = {
             'penalties' : penalties,
@@ -120,28 +123,28 @@ def penalty(request, username=None):
             return Response(serializer.data,status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST) 
     
-
-
-# @api_view(['GET','POST'])
-# @permission_classes([IsAuthenticated])
-# @authentication_classes([TokenAuthentication])
-# def penalty(request):
-
-#     if request.method == 'GET':
-#         user = get_object_or_404(User ,username=request.user.username)
-#         penalty = Penalty.objects.filter(user=user)
-#         penalties = serializers.PenaltySerializers(penalty,many=True).data
-#         resp = {
-#             'penalties' : penalties,
-#         }
-#         return Response(data=resp,status=status.HTTP_200_OK)
+@api_view(['GET','POST'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([TokenAuthentication])
+def vehicles(request, username=None):
+    if request.method == 'GET':
+        user = get_object_or_404(User, username=username) if username else request.user
+        vehicle = Vehicle.objects.filter(user=user)
+        vehicles = serializers.VehicleSerializer(vehicle,many=True).data
+        resp = {
+            'vehicles' : vehicles,
+        }
+        print(resp)
+        return Response(data=resp,status=status.HTTP_200_OK)
     
-#     elif request.method == 'POST':
-#         user = get_object_or_404(User ,username=request.user.username)
-#         serializer = serializers.PenaltySerializers(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data,status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST) 
-
-
+    elif request.method == 'POST':
+        user = get_object_or_404(User ,username=request.user.username)
+        print(request.data)
+        data = request.data.copy()  # create a copy of the data dictionary
+        user = [user.id]
+        data['user'] = user
+        serializer = serializers.PostVehicleSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data,status=status.HTTP_201_CREATED)
+        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST) 

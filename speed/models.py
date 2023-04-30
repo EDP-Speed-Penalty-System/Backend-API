@@ -23,7 +23,7 @@ class UserInfo(models.Model):
 
 class Vehicle(models.Model):
     register_no = models.CharField(max_length=100, primary_key=True)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ManyToManyField(User)
     desc = models.CharField(max_length=100)
 
 class Penalty(models.Model):

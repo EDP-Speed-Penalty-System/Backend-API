@@ -26,19 +26,6 @@ class SpeedLimitSerializer(serializers.ModelSerializer):
         model=SpeedLimit
         fields=('__all__')
 
-# class DepartmentInfoSerializer(serializers.ModelSerializer):
-
-#     class Meta:
-#         model = DepartmentInfo
-#         fields = ('__all__')
-
-# class UserInfoSerializer(serializers.ModelSerializer):
-#     department = DepartmentInfoSerializer()
-#     class Meta:
-#         model = UserInfo
-#         fields = ('department','id','date_of_birth',
-#                 'address','phone_no')
-
 class UserInfoSerializers(serializers.ModelSerializer):
     class Meta:
         model = UserInfo
@@ -59,16 +46,18 @@ class PostPenaltySerializer(serializers.ModelSerializer):
         model=Penalty
         fields=('__all__')
 
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model=User
-        # fields=('__all__')
-        # fields=('first_name','last_name')
         exclude=('password',)
 
-# class DepartmentInfoSerializer(serializers.ModelSerializer):
+class VehicleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Vehicle
+        exclude=('user',)
 
-#     class Meta:
-#         model = DepartmentInfo
-#         fields = ('__all__')
+class PostVehicleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Vehicle
+        fields=('__all__')
+
