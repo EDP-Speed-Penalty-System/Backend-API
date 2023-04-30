@@ -33,19 +33,36 @@ jobs:
 
     - name: Authenticate Docker with GCR
       run: gcloud auth configure-docker
-    
+
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
         context: .
         file: ./Dockerfile
         push: true
-        tags: gcr.io/edp-backend/backend-api:${{ github.sha }}
+        tags: gcr.io/edp-instance/backend-api:${{ github.sha }}
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
 
-    - name: Deploy to GCP Compute instance
+    - name: Install Docker Compose on GCP Compute instance
       run: |
-        gcloud compute instances update-container edp-instance \
+        gcloud compute ssh edp-instance \
           --zone asia-south1-c \
-          --container-image gcr.io/edp-backend/backend-api:${{ github.sha }}
+          --command 'curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /tmp/docker-compose'
+        gcloud compute ssh edp-instance \
+          --zone asia-south1-c \
+          --command 'chmod +x /tmp/docker-compose'
+        gcloud compute ssh edp-instance \
+          --zone asia-south1-c \
+          --command 'sudo mv /tmp/docker-compose /usr/local/bin/docker-compose'
+
+    - name: Copy docker-compose.yml to GCP Compute instance
+      run: |
+        gcloud compute scp ./docker-compose.yml edp-instance:/tmp/docker-compose.yml \
+          --zone asia-south1-c
+
+    - name: Run docker-compose on GCP Compute instance
+      run: |
+        gcloud compute ssh edp-instance \
+          --zone asia-south1-c \
+          --command 'cd /tmp && docker-compose down && docker-compose pull && docker-compose up -d'
