@@ -60,8 +60,23 @@ jobs:
       run: |
         gcloud compute scp {docker-compose.yml,./postgres-init/db_edp.sql} edp-instance:/tmp/ \
           --zone asia-south1-c
+    
+    - name: Copy service account JSON key to GCP Compute instance
+      env:
+      GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+      run: |
+        echo "$GCP_SA_KEY" > sa_key.json
+        gcloud compute scp sa_key.json edp-instance:/tmp/sa_key.json \
+          --zone asia-south1-c
+
     - name: Run docker-compose on GCP Compute instance
       run: |
-        gcloud compute ssh edp-instance \
-          --zone asia-south1-c \
+        gcloud compute ssh INSTANCE_NAME \
+          --zone COMPUTE_ZONE \
+          --command 'sudo gcloud auth activate-service-account --key-file=/tmp/sa_key.json'
+        gcloud compute ssh INSTANCE_NAME \
+          --zone COMPUTE_ZONE \
+          --command 'sudo gcloud auth configure-docker'
+        gcloud compute ssh INSTANCE_NAME \
+          --zone COMPUTE_ZONE \
           --command 'cd /tmp && docker-compose down && docker-compose pull && docker-compose up -d'
