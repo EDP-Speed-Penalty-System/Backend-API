@@ -58,7 +58,7 @@ jobs:
 
     - name: Copy Repository content to GCP Compute instance
       run: |
-        gcloud compute scp ./ edp-instance:/tmp/ \
+        gcloud compute scp {docker-compose.yml,./postgres-init/db_edp.sql} edp-instance:/tmp/{docker-compose.yml,postgres-init/db_edp.sql} \
           --zone asia-south1-c
     - name: Run docker-compose on GCP Compute instance
       run: |
