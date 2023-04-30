@@ -40,7 +40,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: gcr.io/edp-instance/backend-api:${{ github.sha }}
+        tags: gcr.io/edp-backend/backend-api:${{ github.sha }}
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
 
