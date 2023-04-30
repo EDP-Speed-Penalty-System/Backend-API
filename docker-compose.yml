@@ -9,10 +9,10 @@ services:
       - POSTGRES_PASSWORD=pwd
     volumes:
       - pgdata:/var/lib/postgresql/data
+      - ./postgres-init:/docker-entrypoint-initdb.d
     ports:
       - "5432:5432"
-    # command: bash -c "psql -U edp -d edp -f 'db_edp.sql'"
-    
+
   web:
     build: .
     command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
@@ -25,5 +25,6 @@ services:
     environment:
       - DB_HOST=db
       - DJANGO_SETTINGS_MODULE=EDP.settings
+
 volumes:
   pgdata:
