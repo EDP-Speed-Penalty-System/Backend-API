@@ -40,7 +40,7 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: gcr.io/edp-backend/backend-api:${{ github.sha }}
+        tags: gcr.io/edp-backend/backend-api:latest
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
 
@@ -56,11 +56,10 @@ jobs:
           --zone asia-south1-c \
           --command 'sudo mv /tmp/docker-compose /usr/local/bin/docker-compose'
 
-    - name: Copy docker-compose.yml to GCP Compute instance
+    - name: Copy Repository content to GCP Compute instance
       run: |
-        gcloud compute scp ./docker-compose.yml edp-instance:/tmp/docker-compose.yml \
+        gcloud compute scp ./ edp-instance:/tmp/ \
           --zone asia-south1-c
-
     - name: Run docker-compose on GCP Compute instance
       run: |
         gcloud compute ssh edp-instance \
