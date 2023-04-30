@@ -69,12 +69,12 @@ jobs:
 
     - name: Run docker-compose on GCP Compute instance
       run: |
-        gcloud compute ssh INSTANCE_NAME \
-          --zone COMPUTE_ZONE \
+        gcloud compute ssh edp-instance \
+          --zone asia-south1-c \
           --command 'sudo gcloud auth activate-service-account --key-file=/tmp/sa_key.json'
-        gcloud compute ssh INSTANCE_NAME \
-          --zone COMPUTE_ZONE \
+        gcloud compute ssh edp-instance \
+          --zone asia-south1-c \
           --command 'sudo gcloud auth configure-docker'
-        gcloud compute ssh INSTANCE_NAME \
-          --zone COMPUTE_ZONE \
+        gcloud compute ssh edp-instance \
+          --zone asia-south1-c \
           --command 'cd /tmp && docker-compose down && docker-compose pull && docker-compose up -d'
