@@ -5,7 +5,7 @@
 -- Dumped from database version 15.1
 -- Dumped by pg_dump version 15.1
 
--- Started on 2023-05-01 03:34:11
+-- Started on 2023-05-01 07:32:30
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -629,7 +629,7 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
 2	pbkdf2_sha256$390000$tqnAJ2pn7ukculNPtjOMxJ$sDLZkge12mzDGXqqu4XlURihemqz1TEB1riQD6E0g3Y=	2023-03-29 01:04:56+05:30	f	test	Tushar	Trivedi	tushar3297@gmail.com	f	t	2023-03-29 01:04:59+05:30
-1	pbkdf2_sha256$390000$Bza1Wk4xAyxg8fZddlyh8v$3As2b9wrDidLEQXF1wIH7DKcGMzpxqIR4N2nD6ZuA8Y=	2023-05-01 03:25:01.440474+05:30	t	ujjawal	UJJAWAL	LELE	ujjawallele13@gmail.com	t	t	2023-03-25 03:27:36+05:30
+1	pbkdf2_sha256$390000$Bza1Wk4xAyxg8fZddlyh8v$3As2b9wrDidLEQXF1wIH7DKcGMzpxqIR4N2nD6ZuA8Y=	2023-05-01 07:19:42.998801+05:30	t	ujjawal	UJJAWAL	LELE	ujjawallele13@gmail.com	t	t	2023-03-25 03:27:36+05:30
 \.
 
 
@@ -705,6 +705,20 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 31	2023-05-01 03:25:47.479082+05:30	13	Penalty object (13)	3		14	1
 32	2023-05-01 03:25:47.480283+05:30	12	Penalty object (12)	3		14	1
 33	2023-05-01 03:25:47.480788+05:30	11	Penalty object (11)	3		14	1
+34	2023-05-01 06:27:32.479301+05:30	3	SpeedLimit object (3)	3		1	1
+35	2023-05-01 06:27:32.494254+05:30	2	SpeedLimit object (2)	3		1	1
+36	2023-05-01 06:27:32.495252+05:30	1	SpeedLimit object (1)	3		1	1
+37	2023-05-01 06:29:45.65367+05:30	4	SpeedLimit object (4)	1	[{"added": {}}]	1	1
+38	2023-05-01 06:31:29.635601+05:30	5	SpeedLimit object (5)	1	[{"added": {}}]	1	1
+39	2023-05-01 06:32:55.988102+05:30	6	SpeedLimit object (6)	1	[{"added": {}}]	1	1
+40	2023-05-01 06:33:20.91388+05:30	7	SpeedLimit object (7)	1	[{"added": {}}]	1	1
+41	2023-05-01 06:33:42.872183+05:30	8	SpeedLimit object (8)	1	[{"added": {}}]	1	1
+42	2023-05-01 06:34:03.829863+05:30	9	SpeedLimit object (9)	1	[{"added": {}}]	1	1
+43	2023-05-01 06:34:28.08336+05:30	10	SpeedLimit object (10)	1	[{"added": {}}]	1	1
+44	2023-05-01 06:34:58.439412+05:30	11	SpeedLimit object (11)	1	[{"added": {}}]	1	1
+45	2023-05-01 06:35:24.485394+05:30	12	SpeedLimit object (12)	1	[{"added": {}}]	1	1
+46	2023-05-01 06:35:50.706766+05:30	13	SpeedLimit object (13)	1	[{"added": {}}]	1	1
+47	2023-05-01 06:36:17.665088+05:30	14	SpeedLimit object (14)	1	[{"added": {}}]	1	1
 \.
 
 
@@ -791,6 +805,7 @@ ziiae8fybcpmp8jo6oz9syl4bfjmu8i0	.eJxVjDsOwjAQBe_iGln-bhxKes5gbbxeHEC2FCcV4u4QKQ
 x5bm24m5oysdjwg4vehmmdazmm4l4pcu	.eJxVjDsOwjAQBe_iGln-bhxKes5gbbxeHEC2FCcV4u4QKQW0b2beS0Tc1hK3npc4kzgLLU6_24TpkesO6I711mRqdV3mSe6KPGiX10b5eTncv4OCvXxr4wEQHKXgLJNPzpnAXvvsQubJgko4mpEGIAOKEHXggdnaxNkCKBbvD9y-OBM:1ppPgR:ik0l1OhMgFeXoJ4zbSNJnYCbnj6rivR3b1AtmygqB0M	2023-05-04 14:00:27.271048+05:30
 p1exlh6gt5cs4t36hj0plbtnkrvqbbt4	.eJxVjDsOwjAQBe_iGln-bhxKes5gbbxeHEC2FCcV4u4QKQW0b2beS0Tc1hK3npc4kzgLLU6_24TpkesO6I711mRqdV3mSe6KPGiX10b5eTncv4OCvXxr4wEQHKXgLJNPzpnAXvvsQubJgko4mpEGIAOKEHXggdnaxNkCKBbvD9y-OBM:1ps7db:WSFYW_LpHTgukHX5vK0Y0L11NS3uZu8k5b5Em4yV8Dw	2023-05-12 01:20:43.254488+05:30
 vvcrvrhcmqpf7wyca103yw9d95oo76s0	.eJxVjDsOwjAQBe_iGln-bhxKes5gbbxeHEC2FCcV4u4QKQW0b2beS0Tc1hK3npc4kzgLLU6_24TpkesO6I711mRqdV3mSe6KPGiX10b5eTncv4OCvXxr4wEQHKXgLJNPzpnAXvvsQubJgko4mpEGIAOKEHXggdnaxNkCKBbvD9y-OBM:1ptF0X:8_svvy50YhUaFqDsDfUdN__TJNaYkBGN1TWy1TSRHEs	2023-05-15 03:25:01.445841+05:30
+hk3jq517b0k6k9qgqwsqvbxy2bcz7zru	.eJxVjDsOwjAQBe_iGln-bhxKes5gbbxeHEC2FCcV4u4QKQW0b2beS0Tc1hK3npc4kzgLLU6_24TpkesO6I711mRqdV3mSe6KPGiX10b5eTncv4OCvXxr4wEQHKXgLJNPzpnAXvvsQubJgko4mpEGIAOKEHXggdnaxNkCKBbvD9y-OBM:1ptIff:Rq20Q3avk6tSGdTboUO9avS4D_eDPCDski7AWbDDGy8	2023-05-15 07:19:43.003739+05:30
 \.
 
 
@@ -821,9 +836,17 @@ COPY public.speed_penalty (id, latitude, longitude, speed, "limit", date, vehicl
 --
 
 COPY public.speed_speedlimit (id, latitude, longitude, "limit") FROM stdin;
-1	37.386339	-122.085823	120
-2	37.387140	-122.083235	145
-3	37.393885	-122.078916	150
+4	23.176354	80.016790	3
+5	23.176414	80.017140	5
+6	23.176498	80.017583	7
+7	23.176555	80.017804	8
+8	23.176652	80.018157	6
+9	23.176751	80.018444	4
+10	23.176884	80.018818	2
+11	23.177201	80.019609	2
+12	23.177380	80.020273	4
+13	23.177601	80.020783	5
+14	23.177926	80.021184	2
 \.
 
 
@@ -951,7 +974,7 @@ SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: edp
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 33, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 47, true);
 
 
 --
@@ -987,7 +1010,7 @@ SELECT pg_catalog.setval('public.speed_penalty_id_seq', 22, true);
 -- Name: speed_speedlimit_id_seq; Type: SEQUENCE SET; Schema: public; Owner: edp
 --
 
-SELECT pg_catalog.setval('public.speed_speedlimit_id_seq', 3, true);
+SELECT pg_catalog.setval('public.speed_speedlimit_id_seq', 14, true);
 
 
 --
@@ -1613,8 +1636,9 @@ ALTER TABLE ONLY public.speed_vehicle_user
     ADD CONSTRAINT speed_vehicle_user_vehicle_id_537b46c9_fk_speed_veh FOREIGN KEY (vehicle_id) REFERENCES public.speed_vehicle(register_no) DEFERRABLE INITIALLY DEFERRED;
 
 
--- Completed on 2023-05-01 03:34:12
+-- Completed on 2023-05-01 07:32:30
 
 --
 -- PostgreSQL database dump complete
 --
+

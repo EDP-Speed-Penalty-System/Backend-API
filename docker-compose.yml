@@ -16,8 +16,6 @@ services:
   web:
     image: gcr.io/edp-backend/backend-api:latest
     command: bash -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
-    volumes:
-      - .:/Backend_API
     ports:
       - "8000:8000"
     depends_on:
